@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave System</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    {% block extra_css %}{% endblock %}
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- OVERLAY (click outside sidebar closes it) -->
+<div class="overlay" onclick="closeSidebar()"></div>
+
+<div class="app-container">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="left-section">
+
+        <div class="left-title">
+            <i class="fa-regular fa-calendar-check"></i>
+            <h3>Leave Approval System</h3>
+        </div>
+
+        <ul class="links-list">
+
+            {% if role == 'employee' %}
+
+                <li>
+                    <i class="fa-solid fa-house"></i>
+                    <a href="{{ url_for('employee.employee_dashboard') }}">Dashboard</a>
+                </li>
+
+                <li>
+                    <i class="fa-solid fa-file-circle-plus"></i>
+                    <a href="{{ url_for('leave.request_leave') }}">Request Leave</a>
+                </li>
+
+                <li>
+                    <i class="fa-solid fa-list"></i>
+                    <a href="{{ url_for('leave.my_requests') }}">My Requests</a>
+                </li>
+
+            {% elif role == 'admin' %}
+
+                <li>
+                    <i class="fa-solid fa-house"></i>
+                    <a href="{{ url_for('admin.admin_dashboard') }}">Dashboard</a>
+                </li>
+
+                <li>
+                    <i class="fa-solid fa-file-circle-check"></i>
+                    <a href="{{ url_for('leave.approve_requests') }}">Approve Requests</a>
+                </li>
+
+                <li>
+                    <i class="fa-solid fa-list"></i>
+                    <a href="{{ url_for('leave.all_requests') }}">All Requests</a>
+                </li>
+
+            {% endif %}
+
+            <li>
+                <i class="fa-solid fa-lock"></i>
+                <a href="{{ url_for('auth.change_password') }}">Change Password</a>
+            </li>
+
+            <li>
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <a href="{{ url_for('auth.logout') }}">Logout</a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- RIGHT SECTION -->
+    <div class="right-section">
+
+        <!-- TOP BAR -->
+        <header class="top-bar">
+
+            <!-- MENU BUTTON -->
+            <div class="menu-toggle" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <div class="top-right">
+
+                <i class="fa-regular fa-bell bell-icon"></i>
+
+                <i class="fa-solid fa-circle-user user-icon"></i>
+
+                <div class="user-info">
+                    <p class="user-name">{{ user_name }}</p>
+                    <p class="user-role">{{ role }}</p>
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- PAGE CONTENT -->
+        <main class="content-area">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+    </div>
+
+</div>
+
+<!-- JS -->
+<script>
+function toggleSidebar() {
+    document.querySelector(".left-section").classList.toggle("active");
+    document.querySelector(".overlay").classList.toggle("active");
+}
+
+function closeSidebar() {
+    document.querySelector(".left-section").classList.remove("active");
+    document.querySelector(".overlay").classList.remove("active");
+}
+</script>
+
+</body>
+</html>

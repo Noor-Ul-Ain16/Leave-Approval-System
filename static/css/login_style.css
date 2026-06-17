@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;}
+    
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+    background-image: url("../images/office_bg.avif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    min-height: 100vh;
+}
+
+/* FULL SCREEN CENTER WRAPPER */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+}
+
+/* LOGIN CARD */
+.login-card {
+    background-color: white;
+
+    width: 360px;
+
+    padding: 40px 35px;
+
+    border-radius: 16px;
+
+    box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+
+    text-align: center;
+}
+
+/* TITLE */
+.login-title {
+    margin: 0;
+    font-size: 24px;
+    color: #1e2a78;
+}
+
+/* SUBTITLE */
+.login-subtitle {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* FORM */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* FORM LABELS */
+.login-form label{
+    display: block;
+
+    text-align: left;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-top: 10px;
+    /* margin-bottom: 5px; */
+}
+
+/* INPUTS */
+.login-form input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+}
+
+/* BUTTON */
+.login-submit {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+
+    background-color: #2563eb;
+    color: white;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.login-submit:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.login-form a {
+            justify-content:right;
+            align-self: self-end;
+            text-decoration: none;
+}
+
+.forgot_password,
+.forgot_password:visited,
+.forgot_password:active{
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.password-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-box input {
+    width: 100%;
+    padding-right: 40px; /* space for eye icon */
+}
+
+.toggle-eye {
+    position: absolute;
+    right: 12px;
+    cursor: pointer;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.error-message{
+    color:red;
+    font-size: 14px;
+}

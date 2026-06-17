@@ -1,0 +1,288 @@
+.request-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 14px;
+    box-sizing: border-box;
+}
+
+/* BACK BUTTON */
+.back-button {
+    margin-bottom: 10px;
+}
+
+.back-button a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    color: #1e293b;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* HEADER */
+.requests-details-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.requests-details-header h2 {
+    font-size: 25px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* GRID */
+.request-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: stretch;
+}
+
+/* CARDS */
+.leave-details-left,
+.leave-details-right {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+/* TITLES */
+.card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 14px;
+}
+
+.card-title span {
+    font-size: 12px;
+    font-weight: 500;
+    color: #64748b;
+}
+
+/* LEFT DETAILS */
+.row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f5f9;
+    align-items: start;
+}
+
+.row:last-child {
+    border-bottom: none;
+}
+
+.row span:first-child {
+    color: #64748b;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.row span:last-child {
+    color: #0f172a;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+/* RIGHT SIDE */
+.leave-details-right {
+    display: flex;
+    flex-direction: column;
+}
+
+/* STATUS AREA */
+.right-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* STATUS VIEW DEFAULT */
+.status-view {
+    text-align: center;
+    padding: 18px 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.status-view i {
+    font-size: 56px;
+    margin-bottom: 8px;
+    transition: 0.2s ease;
+}
+
+.status-view h1 {
+    font-size: 26px;
+    margin: 0;
+}
+
+.status-view p {
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 5px;
+}
+
+/* =========================
+   ADMIN MODE (IMPORTANT)
+   ========================= */
+.admin-mode .status-view {
+    padding: 10px 10px;
+    flex: 0.6;
+}
+
+.admin-mode .status-view i {
+    font-size: 42px;
+}
+
+.admin-mode .status-view h1 {
+    font-size: 20px;
+}
+
+/* STATUS COLORS */
+.status-view.pending i,
+.status-view.pending h1 {
+    color: #f59e0b;
+}
+
+.status-view.approved i,
+.status-view.approved h1 {
+    color: #16a34a;
+}
+
+.status-view.rejected i,
+.status-view.rejected h1 {
+    color: #dc2626;
+}
+
+/* ADMIN FORM */
+.admin-form {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-form label {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 6px;
+}
+
+/* TEXTAREA */
+.admin-remarks {
+    width: 100%;
+    box-sizing: border-box;
+
+    min-height: 130px;
+    padding: 12px;
+
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+
+    resize: none;
+    outline: none;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+}
+
+/* BUTTONS */
+.button-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.approve_button,
+.reject_button {
+    flex: 1;
+    border: none;
+    border-radius: 10px;
+    padding: 11px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.approve_button {
+    background: #16a34a;
+    color: white;
+}
+
+.approve_button:hover {
+    background: #15803d;
+}
+
+.reject_button {
+    background: #dc2626;
+    color: white;
+}
+
+.reject_button:hover {
+    background: #b91c1c;
+}
+
+/* REMARKS */
+.remarks {
+    margin-top: 14px;
+    padding: 11px;
+    background: #f8fafc;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #334155;
+    line-height: 1.6;
+    word-break: break-word;
+}
+
+/* RESPONSIVE */
+@media (max-width: 850px) {
+    .request-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .request-container {
+        padding: 10px;
+    }
+
+    .requests-details-header h2 {
+        font-size: 22px;
+    }
+
+    .row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
+    .button-row {
+        flex-direction: column;
+    }
+
+    .status-view i {
+        font-size: 44px;
+    }
+
+    .status-view h1 {
+        font-size: 21px;
+    }
+
+    .admin-remarks {
+        min-height: 115px;
+    }
+}

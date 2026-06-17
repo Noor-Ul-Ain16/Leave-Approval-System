@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/display_request.css') }}">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="requests-section">
+
+    <div class="requests-header">
+        <h2>{{ name }}</h2>
+    </div>
+
+    <!-- SEARCH / FILTER FORM -->
+    <div class="table-card">
+
+        <form method="GET" class="filter-form">
+
+            <!-- SEARCH BOX -->
+            <input
+                type="text"
+                name="search"
+                placeholder="Type: name / leave type / status (e.g. on-leave)"
+                value="{{ search or '' }}"
+            >
+
+            <!-- FILTER TYPE -->
+            <select name="filter_by">
+
+                {% if role == "admin" %}
+                    <option value="name"
+                        {% if filter_by == "name" %}selected{% endif %}>
+                        Employee Name
+                    </option>
+                {% endif %}
+
+                <option value="leave_type"
+                    {% if filter_by == "leave_type" %}selected{% endif %}>
+                    Leave Type
+                </option>
+
+                <option value="status"
+                    {% if filter_by == "status" %}selected{% endif %}>
+                    Status
+                </option>
+
+            </select>
+
+            <button type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </button>
+
+        </form>
+
+        <table class="requests-table">
+
+            <thead>
+                <tr>
+                    <th>#</th>
+
+                    {% if role == "admin" %}
+                        <th>Employee Name</th>
+                    {% endif %}
+
+                    <th>Leave Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>No. of days</th>
+                    <th>Created At</th>
+                    <th style="text-align:center;">Status</th>
+                    <th style="text-align:center;">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% if requests and requests|length > 0 %}
+
+                    {% for request in requests %}
+
+                    <tr>
+
+                        <!-- SERIAL NUMBER WITH PAGINATION OFFSET -->
+                        <td>{{ loop.index + ((page - 1) * 10) }}</td>
+
+                        {% if role == "admin" %}
+                            <td>{{ request.name }}</td>
+                        {% endif %}
+
+                        <td>{{ request.leave_type }}</td>
+
+                        <td>{{ request.start_date.strftime('%d %b %Y') }}</td>
+
+                        <td>{{ request.end_date.strftime('%d %b %Y') }}</td>
+
+                        <td>
+                            {{ (request.end_date - request.start_date).days + 1 }} days
+                        </td>
+
+                        <td>{{ request.created_at.strftime('%d %b %Y') }}</td>
+
+                        <td>
+                            <span class="status {{ request.status.lower() }}">
+                                {{ request.status }}
+                            </span>
+                        </td>
+
+                        <td style="text-align:center;">
+
+                            {% if role == "admin" and mode == "approve_requests" %}
+
+                                <a href="{{ url_for('leave.request_details', leave_id=request.leave_id) }}"
+                                   class="view-eye-btn">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+
+                                <form method="POST"
+                                      action="{{ url_for('leave.handle_leave_action', leave_id=request.leave_id) }}"
+                                      style="display:inline;">
+
+                                    <input type="hidden" name="remarks" value="">
+
+                                    <button type="submit"
+                                            name="action"
+                                            value="approve"
+                                            class="approve_button">
+                                        <i class="fa-solid fa-check"></i>
+                                    </button>
+
+                                    <button type="submit"
+                                            name="action"
+                                            value="reject"
+                                            class="reject_button">
+                                        <i class="fa-solid fa-x"></i>
+                                    </button>
+
+                                </form>
+
+                            {% else %}
+
+                                <a href="{{ url_for('leave.request_details', leave_id=request.leave_id) }}"
+                                   class="view-btn">
+                                    View
+                                </a>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <tr>
+                        <td colspan="9"
+                            style="text-align:center; padding:20px; color:#64748b;">
+                            No Requests Available
+                        </td>
+                    </tr>
+
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- PAGINATION -->
+    {% if total_pages > 1 %}
+    <div class="pagination">
+
+        {% if page > 1 %}
+            <a href="?page={{ page - 1 }}&search={{ search }}&filter_by={{ filter_by }}">
+                Previous
+            </a>
+        {% endif %}
+
+        {% for p in range(1, total_pages + 1) %}
+            <a href="?page={{ p }}&search={{ search }}&filter_by={{ filter_by }}"
+               class="{% if p == page %}active{% endif %}">
+                {{ p }}
+            </a>
+        {% endfor %}
+
+        {% if page < total_pages %}
+            <a href="?page={{ page + 1 }}&search={{ search }}&filter_by={{ filter_by }}">
+                Next
+            </a>
+        {% endif %}
+
+    </div>
+    {% endif %}
+
+</section>
+
+{% endblock %}

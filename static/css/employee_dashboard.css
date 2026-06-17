@@ -1,0 +1,167 @@
+
+/* ================= GLOBAL DASHBOARD ================= */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 14px 16px;
+
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* ================= HEADER ================= */
+.dashboard-header h2 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.dashboard-header p {
+    margin: 4px 0 0;
+    color: grey;
+    font-size: 20px;
+}
+
+/* ================= STATS CARDS ================= */
+.stats-cards {
+    display: flex;
+    gap: 14px;
+}
+
+/* CARD */
+.card {
+    flex: 1;
+    background: white;
+    padding: 16px 18px;
+
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    min-height: 75px;
+
+    transition: 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* ICON + TEXT WRAPPER */
+.card-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+}
+
+/* ICON */
+.icon-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-box i {
+    font-size: 16px;
+    color: white;
+}
+
+/* COLORS */
+.pending-icon { background: orange; }
+.approved-icon { background: green; }
+.rejected-icon { background: red; }
+
+/* TEXT */
+.card-text h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.card-text p {
+    margin: 3px 0 0;
+    color: grey;
+    font-size: 14px;
+}
+
+/* ================= LATEST REQUEST ================= */
+.latest-request {
+    background: white;
+    padding: 14px 16px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    line-height: 2;
+}
+
+.latest-request h3 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+}
+
+.request-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+/* ================= STATUS ================= */
+.status {
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+.status.approved {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+/* REJECTED */
+
+.status.rejected {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+/* ON LEAVE */
+.status.on-leave {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+}
+
+/* COMPLETED */
+.status.completed {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+/* ================= BUTTON ================= */
+.view-btn {
+    margin-top: 10px;
+    padding: 7px 12px;
+    border: none;
+    background: #2f6bff;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.view-btn:hover {
+    background: #1f55d6;
+}

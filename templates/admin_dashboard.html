@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="admin-dashboard">
+
+    <!-- ================= HEADER ================= -->
+    <div class="dashboard-header">
+        <h2>Admin Dashboard</h2>
+        <p>Welcome back, {{user_name}}!</p>
+    </div>
+
+    <!-- ================= FLASH CARDS ================= -->
+    <div class="stats-cards">
+
+        <div class="card on-leave">
+            <div class="card-content">
+                <div class="icon-box on-leave-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="card-text">
+                    <h3>{{total_count}}</h3>
+                    <p>Employees on Leave</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card pending">
+            <div class="card-content">
+                <div class="icon-box pending-icon">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <div class="card-text">
+                    
+                    <h3>{{ counts.pending }}</h3>
+                    <p>Pending Requests</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Approved -->
+        <div class="card approved">
+            <div class="card-content">
+                <div class="icon-box approved-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="card-text">
+                    <h3>{{ counts.approved }}</h3>
+                    <p>Approved</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rejected -->
+        <div class="card rejected">
+            <div class="card-content">
+                <div class="icon-box rejected-icon">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+                <div class="card-text">
+                    <h3>{{ counts.rejected }}</h3>
+                    <p>Rejected</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--Recent Requests-->
+    <div class="requests-header">
+        <h2>Recent Requests</h2>
+    </div>
+    <!-- ================= LATEST REQUESTS ================= -->
+    <!-- TABLE CARD -->
+    <div class="table-card">
+
+        <table class="requests-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+
+                    {% if role == "admin" %}
+                        <th>Employee Name</th>
+                    {% endif %}
+
+                    <th>Leave Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for request in requests %}
+
+                <tr>
+
+                    <td>{{ loop.index }}</td>
+
+                    {% if role == "admin" %}
+                        <td>{{ request.name }}</td>
+                    {% endif %}
+
+                    <td>{{ request.leave_type }}</td>
+
+                    <td>
+                        {{ request.start_date.strftime('%d %b %Y') }}
+                    </td>
+
+                    <td>
+                        {{ request.end_date.strftime('%d %b %Y') }}
+                    </td>
+
+                    <td>
+                        <span class="status {{ request.status.lower() }}">
+                            {{ request.status }}
+                        </span>
+                    </td>
+
+                    <td>
+                        <a href="{{ url_for('leave.request_details', leave_id=request.leave_id) }}" class="view-btn">View</a>
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,161 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("../images/office_bg.avif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+}
+
+/* ================= CONTAINER ================= */
+.container {
+    width: 895px;
+    background-color: white;
+
+    padding: 55px 50px 15px 50px;
+
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 25px; }
+
+/* ================= HERO ================= */
+.hero {
+    text-align: center;
+}
+
+.hero-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.hero-title i {
+    font-size: 55px;
+    margin-bottom: 20px;
+    color: #1e2a78;
+}
+
+.project-title {
+    font-size: 42px;
+    color: #1e2a78;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.below-title-text {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+    max-width: 650px;
+    margin: 0 auto;
+    padding-top: 5px;
+}
+
+/* ================= GUIDELINES ================= */
+.guidelines {
+    padding: 20px;
+}
+
+.guidelines-heading {
+    font-size: 24px;
+    color: #1e2a78;
+    margin-bottom: 15px;
+}
+
+.guidelines-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.guidelines-list li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    color: #444;
+    line-height: 1.6;
+}
+
+.guidelines-list li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: #10b981;
+    font-weight: bold;
+}
+
+/* ================= BUTTONS ================= */
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.login-btn {
+    text-decoration: none;
+
+    border: none;
+
+    width: 280px;
+    height: 55px;
+
+    border-radius: 6px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.3s ease;
+
+    color: white;
+    background-color: #2563eb;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.admin-btn {
+    background-color: #10b981;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 600px) {
+    .actions {
+        flex-direction: column;
+    }
+}
+
+/* ================= FOOTER ================= */
+.footer {
+    margin-top: auto;
+    text-align: center;
+
+    font-size: 14px;
+    color: #777;
+}

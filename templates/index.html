@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Approval System</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-title">
+                <i class="fa-regular fa-calendar-check"></i>
+                <h1 class="project-title">Leave Approval System</h1>
+            </div>
+            
+
+            <p class="below-title-text">
+                A simple and effective way to manage, track, and approve
+                employee leave requests within the organization.
+            </p>
+
+        </section>
+
+        <!-- Guidelines Section -->
+        <section class="guidelines">
+
+            <h3 class="guidelines-heading">Guidelines</h3>
+
+            <ul class="guidelines-list">
+                <li>Submit leave requests with accurate details.</li>
+                <li>You can only have one pending request at a time.</li>
+                <li>Wait for admin approval or rejection.</li>
+                <li>Check your request status regularly.</li>
+                <li>Contact the administrator for any issues.</li>
+            </ul>
+
+        </section>
+
+        <!-- Action Buttons -->
+    <section class="actions">
+    <a href="/login/employee" class="login-btn employee-btn">
+        <i class="fa-solid fa-user"></i>
+        Login as Employee 
+    </a>
+
+    <a href="/login/admin" class="login-btn admin-btn">
+        <i class="fa-solid fa-user"></i>
+         Login as Admin
+    </a>
+</section>
+        <div class="footer">
+            © 2026 Leave Approval System. All rights reserved.
+        </div>    
+    </div>
+
+
+</body>
+</html>

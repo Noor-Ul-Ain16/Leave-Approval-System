@@ -1,0 +1,258 @@
+
+/* =========================
+   PAGE LAYOUT
+========================= */
+.whole-container {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 30px 24px 40px;
+
+    min-height: 100vh;
+
+    background-color: #f5f7fb;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+.request-form-title {
+    margin: 0;
+    padding: 0;
+}
+
+.request-form-title h3 {
+    font-size: 26px;
+
+    font-weight: 700;
+    color: #222;
+
+    margin: 0 0 16px 0;   /* more breathing space below title */
+}
+
+
+/* =========================
+   FORM CARD
+========================= */
+
+.form-container {
+    background-color: white;
+
+    width: 100%;
+    max-width: 980px;   /* slightly bigger */
+
+    padding: 28px 32px; /* increased padding */
+
+    border-radius: 14px;
+
+    border: 1px solid #e6e6e6;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   FORM LAYOUT
+========================= */
+
+form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px; /* slightly more spacing */
+}
+
+
+/* =========================
+   FORM FIELD WRAPPER
+========================= */
+
+.form-field,
+.date-field {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+
+/* =========================
+   LABELS
+========================= */
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #333;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+select,
+input,
+textarea {
+    width: 100%;
+
+    padding: 13px 15px; /* slightly larger inputs */
+
+    border: 1px solid #dcdcdc;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    box-sizing: border-box;
+
+    transition: 0.2s;
+}
+
+
+/* =========================
+   INPUT STATES
+========================= */
+
+select:focus,
+input:focus,
+textarea:focus {
+    border-color: #2563eb;
+}
+
+select:hover,
+input:hover,
+textarea:hover {
+    border-color: #b5b5b5;
+}
+
+
+/* =========================
+   DATE GRID
+========================= */
+
+.form-dates {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 22px; /* slightly more space */
+}
+
+
+/* =========================
+   TEXTAREA
+========================= */
+
+textarea {
+    height: 95px; /* slightly bigger */
+
+    resize: none;
+}
+
+
+/* =========================
+   BUTTON AREA
+========================= */
+
+.form-buttons {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 16px;
+
+    margin-top: 14px;
+}
+
+
+/* =========================
+   BUTTONS (WITH OUTLINES)
+========================= */
+
+.form-buttons button {
+    padding: 10px 20px;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    background-color: transparent; /* important for outline style */
+}
+
+
+/* CANCEL BUTTON */
+
+#cancel-button {
+    border: 1.5px solid #c7c7c7;
+    color: #333;
+}
+
+#cancel-button:hover {
+    background-color: #f3f3f3;
+    border-color: #b5b5b5;
+}
+
+
+/* SUBMIT BUTTON */
+
+#submit-button {
+    border: 1.5px solid #2563eb;
+    background-color: #2563eb;
+    color: white;
+}
+
+#submit-button:hover {
+    background-color: #2563eb;
+    color: white;
+    opacity: 0.8;
+    
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 768px) {
+
+    .whole-container {
+        padding: 22px;
+    }
+
+    .form-container {
+        padding: 22px;
+    }
+
+    .form-dates {
+        grid-template-columns: 1fr;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+    }
+
+    .form-buttons button {
+        width: 100%;
+    }
+}
+.form-error-message{
+    color:red;
+    font-size: 14px;
+}

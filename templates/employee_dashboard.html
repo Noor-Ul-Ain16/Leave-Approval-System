@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/employee_dashboard.css') }}">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <!-- HEADER -->
+    <div class="dashboard-header">
+        <h2>Employee Dashboard</h2>
+        <p>Welcome back, {{ user_name }}!</p>
+    </div>
+
+    <!-- ================= STATS CARDS ================= -->
+    <div class="stats-cards">
+
+        <!-- Pending -->
+        <div class="card pending">
+            <div class="card-content">
+                <div class="icon-box pending-icon">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <div class="card-text">
+                    <h3>{{ counts.pending }}</h3>
+                    <p>Pending Requests</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Approved -->
+        <div class="card approved">
+            <div class="card-content">
+                <div class="icon-box approved-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="card-text">
+                    <h3>{{ counts.approved }}</h3>
+                    <p>Approved</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rejected -->
+        <div class="card rejected">
+            <div class="card-content">
+                <div class="icon-box rejected-icon">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+                <div class="card-text">
+                    <h3>{{ counts.rejected }}</h3>
+                    <p>Rejected</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= LATEST REQUEST ================= -->
+    <div class="latest-request">
+
+        <h3>Latest Request</h3>
+
+        {% if latest %}
+
+        <div class="request-row">
+            <span>Leave Type</span>
+            <strong>{{ latest[0] }}</strong>
+        </div>
+
+        <div class="request-row">
+            <span>Start Date</span>
+            <strong>{{ latest[1] }}</strong>
+        </div>
+
+        <div class="request-row">
+            <span>End Date</span>
+            <strong>{{ latest[2] }}</strong>
+        </div>
+
+        <div class="request-row">
+            <span>Status</span>
+            <span class="status {{ latest[3].lower() }}">{{ latest[3] }}</span>
+        </div>
+
+        <button class="view-btn"
+            onclick="window.location.href='/leave/{{ latest[4] }}'">
+            View Details
+        </button>
+
+        {% else %}
+            <p>No leave requests found.</p>
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

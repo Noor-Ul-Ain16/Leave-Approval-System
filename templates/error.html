@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title if title else "System Exception" }}</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .error-card {
+            text-align: center;
+            padding: 50px 40px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            max-width: 550px;
+            width: 100%;
+            border-top: 6px solid #ef4444;
+        }
+
+        .icon-container {
+            width: 90px;
+            height: 90px;
+            background: #fef2f2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px auto;
+        }
+
+        .error-icon {
+            color: #ef4444;
+            font-size: 3.5rem;
+        }
+
+        .error-title {
+            font-size: 2.2rem;
+            color: #0f172a;
+            margin-bottom: 16px;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .error-message {
+            color: #475569;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .actions-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            width: 100%;
+            max-width: 280px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="error-card">
+        <div class="icon-container">
+            <i class="fa-solid fa-triangle-exclamation error-icon"></i>
+        </div>
+        
+        <h1 class="error-title">{{ title if title else "Application Exception" }}</h1>
+        <p class="error-message">{{ message if message else "An unexpected systemic or logical operational anomaly occurred inside the application runtime engine." }}</p>
+        
+        <div class="actions-wrapper">
+            {% if role == 'admin' %}
+                <a href="{{ url_for('admin.admin_dashboard') }}" class="btn btn-primary">
+                    <i class="fa-solid fa-gauge-high"></i> Return to Dashboard
+                </a>
+            {% elif role == 'employee' %}
+                <a href="{{ url_for('employee.employee_dashboard') }}" class="btn btn-primary">
+                    <i class="fa-solid fa-gauge-high"></i> Return to Dashboard
+                </a>
+            {% else %}
+                <a href="{{ url_for('main.home') }}" class="btn btn-primary">
+                    <i class="fa-solid fa-house"></i> Return to Home
+                </a>
+            {% endif %}
+            
+            <a href="javascript:window.location.reload();" class="btn btn-secondary">
+                <i class="fa-solid fa-rotate-right"></i> Reload Current Process
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

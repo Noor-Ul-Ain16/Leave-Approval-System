@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/request_details.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="request-container">
+
+    <!-- BACK -->
+    <div class="back-button">
+        <a href="javascript:history.back()">
+            <i class="fa-solid fa-arrow-left-long"></i> Back
+        </a>
+    </div>
+
+    <!-- HEADER -->
+    <div class="requests-details-header">
+        <h2>Leave Request Details</h2>
+    </div>
+
+    <!-- GRID -->
+    <div class="request-grid">
+
+        <!-- LEFT -->
+        <section class="leave-details-left">
+
+            <h3 class="card-title">Leave Information</h3>
+
+            <div class="row"><span>Employee ID:</span><span>{{ request.user_id }}</span></div>
+            <div class="row"><span>Employee Name:</span><span>{{ request.name }}</span></div>
+            <div class="row"><span>Leave ID:</span><span>{{ request.leave_id }}</span></div>
+            <div class="row"><span>Leave Type:</span><span>{{ request.leave_type }}</span></div>
+            <div class="row"><span>Start Date:</span><span>{{ request.start_date.strftime('%d %b %Y') }}</span></div>
+            <div class="row"><span>End Date:</span><span>{{ request.end_date.strftime('%d %b %Y') }}</span></div>
+            <div class="row"><span>Total Days:</span><span>{{ (request.end_date - request.start_date).days + 1 }}</span></div>
+            <div class="row"><span>Created At:</span><span>{{ request.created_at.strftime('%d %b %Y') }}</span></div>
+            <div class="row"><span>Reason:</span><span>{{ request.reason }}</span></div>
+
+        </section>
+
+        <!-- RIGHT -->
+        <section class="leave-details-right {% if role == 'admin' and request.status.lower() == 'pending' %}admin-mode{% endif %}">
+
+            <h3 class="card-title">Request Status</h3>
+
+            <div class="right-body">
+
+                {% if request.status.lower() == 'pending' %}
+
+                    <!-- UNIFIED STATUS -->
+                    <div class="status-view pending">
+                        <i class="fa-solid fa-hourglass-half"></i>
+                        <h1>Pending</h1>
+                        <p>Waiting for admin response</p>
+                    </div>
+
+                    {% if role == 'admin' %}
+                       
+                            <form class="admin-form"
+                                method="POST"
+                                action="{{ url_for('leave.handle_leave_action', leave_id=request.leave_id) }}">
+
+                                    <label>Admin Remarks <span>(optional)</span></label>
+
+                                    <textarea name="remarks"
+                                            class="admin-remarks"
+                                            placeholder="Enter remarks"></textarea>
+
+                                    <div class="button-row">
+                                            <button type="submit" name="action" value="approve" class="approve_button">
+                                                    Approve
+                                            </button>
+
+                                            <button type="submit" name="action" value="reject" class="reject_button">
+                                                    Reject
+                                            </button>
+                                    </div>
+
+                            </form>
+                    {% endif %}
+
+                {% elif request.status.lower() == 'approved' %}
+
+                    <div class="status-view approved">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <h1>Approved</h1>
+                        <p>This request has been approved</p>
+                    </div>
+
+                    {% if request.admin_remarks %}
+                        <p class="remarks"><strong>Admin Remarks:</strong> {{ request.admin_remarks }}</p>
+                    {% endif %}
+
+                {% else %}
+
+                    <div class="status-view rejected">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                        <h1>Rejected</h1>
+                        <p>This request has been rejected</p>
+                    </div>
+
+                    {% if request.admin_remarks %}
+                        <p class="remarks"><strong>Admin Remarks:</strong> {{ request.admin_remarks }}</p>
+                    {% endif %}
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+    </div>
+</div>
+
+{% endblock %}
