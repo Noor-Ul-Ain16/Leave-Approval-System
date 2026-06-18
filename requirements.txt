@@ -6,7 +6,7 @@ flask-cors==6.0.2
 Flask-Mail==0.10.0
 
 # Database Connections
-psycopg2==2.9.12
+psycopg2-binary==2.9.12
 supabase==2.30.0
 
 # Environment Management
