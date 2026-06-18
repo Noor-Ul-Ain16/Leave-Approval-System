@@ -18,6 +18,11 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
 
+# LINES FOR HUGGING FACE COMPATIBILITY ---
+app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+app.config['SESSION_COOKIE_SECURE'] = True
+app.config['REMEMBER_COOKIE_SAMESITE'] = 'None'
+
 # ---------------- MAIL CONFIG ----------------
 
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
