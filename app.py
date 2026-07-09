@@ -3,8 +3,6 @@ from dotenv import load_dotenv
 from datetime import timedelta
 import os
 
-from extensions import mail
-
 from modules.main import main_bp
 from modules.auth import auth_bp
 from modules.employee import employee_bp
@@ -22,17 +20,6 @@ app.secret_key = os.getenv("SECRET_KEY")
 app.config['SESSION_COOKIE_SAMESITE'] = 'None'
 app.config['SESSION_COOKIE_SECURE'] = True
 app.config['REMEMBER_COOKIE_SAMESITE'] = 'None'
-
-# ---------------- MAIL CONFIG ----------------
-
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 465
-app.config["MAIL_USE_TLS"] = False
-app.config["MAIL_USE_SSL"] = True
-app.config["MAIL_USERNAME"] = os.getenv("MAIL_USERNAME")
-app.config["MAIL_PASSWORD"] = os.getenv("MAIL_PASSWORD")
-
-mail.init_app(app)
 
 # ---------------- SESSION CONFIG ----------------
 

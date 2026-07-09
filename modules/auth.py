@@ -3,7 +3,7 @@ from utils.auth import check_credentials
 from psycopg2.extras import RealDictCursor
 from werkzeug.security import check_password_hash, generate_password_hash
 import re
-from flask_mail import Message
+import requests
 from random import randint
 from database.db import db_connection
 import os
@@ -11,8 +11,23 @@ import os
 # ================= BLUEPRINT =================
 auth_bp = Blueprint("auth", __name__)
 
-# ================= EXTENSIONS =================
-from extensions import mail
+
+# ---------------- BREVO MAIL HELPER ----------------
+def send_brevo_email(to_email, subject, body_text):
+    url = "https://api.brevo.com/v3/smtp/email"
+    headers = {
+        "accept": "application/json",
+        "api-key": os.getenv("BREVO_API_KEY"),
+        "content-type": "application/json"
+    }
+    payload = {
+        "sender": {"email": os.getenv("MAIL_USERNAME"), "name": "Leave System"},
+        "to": [{"email": to_email}],
+        "subject": subject,
+        "textContent": body_text
+    }
+    response = requests.post(url, json=payload, headers=headers)
+    return response.status_code == 201
 
 
 # ---------------- PASSWORD STRENGTH ----------------
@@ -45,7 +60,6 @@ def handle_login(role):
         session['user_name'] = user[1]
         session['role'] = role
 
-        # FIXED: blueprint-safe redirects (change if your dashboards are in blueprints)
         if role == "admin":
             return redirect(url_for('admin.admin_dashboard'))
         return redirect(url_for('employee.employee_dashboard'))
@@ -180,14 +194,11 @@ def forgot_password():
         session["otp_verified"] = False
         session.permanent = True
 
-        msg = Message(
+        send_brevo_email(
+            to_email=email,
             subject="Leave System OTP",
-            sender=os.getenv("MAIL_USERNAME"),
-            recipients=[email]
+            body_text=f"Your OTP is {otp}. Valid for 3 minutes."
         )
-
-        msg.body = f"Your OTP is {otp}. Valid for 3 minutes."
-        mail.send(msg)
 
         return render_template("forgot_password.html",
             step="verify",
@@ -207,14 +218,11 @@ def forgot_password():
         otp = str(randint(100000, 999999))
         session["reset_otp"] = otp
 
-        msg = Message(
+        send_brevo_email(
+            to_email=email,
             subject="New OTP",
-            sender=os.getenv("MAIL_USERNAME"),
-            recipients=[email]
+            body_text=f"Your NEW OTP is {otp}"
         )
-
-        msg.body = f"Your NEW OTP is {otp}"
-        mail.send(msg)
 
         return render_template("forgot_password.html",
             step="verify",
@@ -261,7 +269,6 @@ def forgot_password():
             )
 
         email = session.get("reset_email")
-
         hashed = generate_password_hash(new_password)
 
         with db_connection() as conn:
