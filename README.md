@@ -9,9 +9,6 @@ pinned: false
 ---
 
 # Leave Approval System
-My Flask and Supabase application deployed on Hugging Face Spaces.
-
-# Leave Approval System
 
 A full-stack web-based Leave Approval System built with Flask. The application streamlines the process of leave requests within an organization by enabling employees to submit requests and administrators to review, approve, or reject them efficiently.
 
