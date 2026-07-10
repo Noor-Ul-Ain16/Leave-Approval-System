@@ -1,12 +1,3 @@
----
-title: Leave Approval System
-emoji: 📝
-colorFrom: blue
-colorTo: indigo
-sdk: docker
-app_file: app.py
-pinned: false
----
 
 # Leave Approval System
 
